@@ -1,20 +1,3 @@
-"""
-DevSync - Slack MCP Server
----------------------------
-Exposes search_messages and get_thread.
-
-Talks to a REAL Slack workspace via the Slack Web API, using a bot
-token. Bot tokens cannot call search.messages (that endpoint needs a
-user token and a paid plan), so search_messages instead pulls recent
-history from a fixed set of channels and filters by keyword - this
-only needs channels:history and channels:read, which a bot token can
-have.
-
-The bot must be a MEMBER of every channel it reads (invite it with
-`/invite @your-bot-name` in each channel), or conversations.history
-will return a not_in_channel error.
-"""
-
 import os
 from dotenv import load_dotenv
 from mcp.server.fastmcp import FastMCP
@@ -32,7 +15,6 @@ SLACK_CHANNELS = [
 
 _client = WebClient(token=SLACK_BOT_TOKEN)
 
-# channel name -> channel id, and a small user id -> display name cache
 _channel_id_cache: dict[str, str] = {}
 _user_name_cache: dict[str, str] = {}
 

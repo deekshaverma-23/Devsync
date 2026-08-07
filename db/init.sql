@@ -1,6 +1,4 @@
 -- DevSync demo database
--- A tiny e-commerce schema, seeded so the data itself already contains
--- evidence of the three demo bugs (PAY-102, AUTH-211, ORD-312).
 
 CREATE TABLE IF NOT EXISTS users (
     id                  SERIAL PRIMARY KEY,
@@ -35,7 +33,6 @@ INSERT INTO users (email, password_reset_at, last_login_at) VALUES
 ('erin@example.com',  now() - interval '6 hours',  NULL);                -- AUTH-211
 
 -- ---------- Seed orders + payments ----------
--- PAY-102 evidence: payment SUCCESS but order stuck in PROCESSING
 INSERT INTO orders (user_id, status, checkout_token, created_at) VALUES
 (1, 'PROCESSING', 'chk-1001', now() - interval '3 hours'),
 (1, 'PROCESSING', 'chk-1002', now() - interval '2 hours'),

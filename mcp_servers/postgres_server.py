@@ -1,6 +1,6 @@
 """
 DevSync - Postgres MCP Server
-------------------------------
+
 Exposes a small, safe set of read-only capabilities over a real
 Postgres database: get_schema, describe_table, run_read_query.
 
@@ -12,8 +12,6 @@ Safety model (defense in depth):
    single SELECT, before it ever reaches the database.
 3. Every query runs inside a READ ONLY transaction as a third layer.
 
-This mirrors the CampusX MCP playlist style: a plain FastMCP server,
-one file, tools declared with @mcp.tool(), no extra abstraction.
 """
 
 import os
@@ -35,7 +33,7 @@ DB_CONFIG = {
     "password": os.getenv("PG_PASSWORD", "devsync_readonly_pw"),
 }
 
-# Only a single SELECT statement is allowed through, nothing else.
+# Only a single SELECT statement is allowed hoga, nothing else.
 _SELECT_ONLY = re.compile(r"^\s*SELECT\b", re.IGNORECASE)
 _FORBIDDEN = re.compile(
     r"\b(INSERT|UPDATE|DELETE|DROP|ALTER|TRUNCATE|GRANT|REVOKE|CREATE)\b",

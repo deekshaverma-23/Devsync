@@ -1,19 +1,3 @@
-"""
-DevSync Client
---------------
-Connects to the three MCP servers (Jira, Slack, Postgres) over stdio,
-gives Gemini the combined tool list, and lets Gemini decide which
-tools to call and in what order to investigate a ticket.
-
-Usage:
-    python client/devsync_client.py "Investigate PAY-102"
-
-This file intentionally has one job: wire MCP <-> Gemini together and
-run the tool-calling loop. It does not contain any Jira/Slack/Postgres
-specific logic - that all lives inside the MCP servers themselves.
-That separation is the whole point of the architecture.
-"""
-
 import asyncio
 import os
 import sys
