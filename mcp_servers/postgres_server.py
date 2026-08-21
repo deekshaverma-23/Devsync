@@ -1,19 +1,3 @@
-"""
-DevSync - Postgres MCP Server
-
-Exposes a small, safe set of read-only capabilities over a real
-Postgres database: get_schema, describe_table, run_read_query.
-
-Safety model (defense in depth):
-1. The server connects using the `devsync_readonly` DB role, which
-   only has SELECT grants (see db/init.sql). Even if the code below
-   had a bug, Postgres itself would reject a write.
-2. `run_read_query` additionally rejects any statement that isn't a
-   single SELECT, before it ever reaches the database.
-3. Every query runs inside a READ ONLY transaction as a third layer.
-
-"""
-
 import os
 import re
 import psycopg2
@@ -33,7 +17,7 @@ DB_CONFIG = {
     "password": os.getenv("PG_PASSWORD", "devsync_readonly_pw"),
 }
 
-# Only a single SELECT statement is allowed hoga, nothing else.
+# Only a single SELECT statement allowed hoga, nothing else.
 _SELECT_ONLY = re.compile(r"^\s*SELECT\b", re.IGNORECASE)
 _FORBIDDEN = re.compile(
     r"\b(INSERT|UPDATE|DELETE|DROP|ALTER|TRUNCATE|GRANT|REVOKE|CREATE)\b",

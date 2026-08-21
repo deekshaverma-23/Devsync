@@ -1,17 +1,3 @@
-"""
-DevSync - Jira MCP Server
---------------------------
-Exposes get_issue, get_issue_comments, search_issues.
-
-This talks to a REAL Jira Cloud site over its REST API. The MCP
-transport (stdio, spawned by devsync_client.py) is unchanged from the
-simulated version - only what happens INSIDE each tool function
-changed, from a JSON lookup to an HTTP call.
-
-Auth: Jira Cloud uses HTTP Basic Auth with your Atlassian account
-email + an API token (not your password). 
-"""
-
 import os
 import requests
 from dotenv import load_dotenv
