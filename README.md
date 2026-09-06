@@ -1,29 +1,30 @@
-DevSync — AI-Powered Developer Investigation Assistant
+# DevSync — AI-Powered Developer Investigation Assistant
 
-DevSync helps developers investigate bugs without manually switching between Jira, Slack, and PostgreSQL to gather and correlate context.
+DevSync helps developers investigate bugs without manually switching between **Jira, Slack, and PostgreSQL** to gather and correlate context.
 
 When a developer encounters an issue, the information needed to understand it is often spread across multiple systems. Jira may contain the issue description and comments, Slack may contain discussions and debugging attempts, while the database may contain the actual runtime evidence.
 
 DevSync brings these sources together and uses Gemini to investigate the issue and generate a single, evidence-based report.
 
-The Problem
+## The Problem
 
 A typical bug investigation can involve:
 
-Reading the Jira ticket and its comments
-Searching Slack for related conversations
-Checking database records
-Connecting information from different sources
-Determining what is actually known versus what is only a hypothesis
+- Reading the Jira ticket and its comments
+- Searching Slack for related conversations
+- Checking database records
+- Connecting information from different sources
+- Determining what is actually known versus what is only a hypothesis
 
 This creates unnecessary context switching and makes investigations time-consuming.
 
-DevSync's goal is to bring the relevant context to the developer instead of making the developer manually search for it.
+**DevSync's goal is to bring the relevant context to the developer instead of making the developer manually search for it.**
 
-How It Works
+## How It Works
 
 A developer starts an investigation with a Jira issue:
 
+```text
 "Investigate SCRUM-1"
 
 DevSync then allows Gemini to determine what information is required and which tools should be used.
@@ -80,7 +81,7 @@ The application consists of one MCP client and three independent MCP servers:
 
 The client does not contain Jira-, Slack-, or PostgreSQL-specific implementation logic. It interacts with the tools exposed by the MCP servers.
 
-For this first version, I implemented the MCP client and all three MCP servers myself to understand the complete MCP flow—from tool discovery and invocation to receiving results and feeding them back into the LLM.
+For this first version, I implemented the MCP client and all three MCP servers myself to understand the complete MCP flow — from tool discovery and invocation to receiving results and feeding them back into the LLM.
 
 The servers communicate with the client through stdio, while each server can independently use whatever mechanism it needs internally, such as REST APIs or a database connection.
 
@@ -161,9 +162,9 @@ Slack
   +
 PostgreSQL
   ↓
-Context gathering
+Context Gathering
   ↓
-Evidence correlation
+Evidence Correlation
   ↓
 Investigation
 
@@ -172,3 +173,5 @@ The UI is intentionally minimal, with Streamlit used primarily to provide an int
 Core Idea
 
 DevSync reduces the context-switching involved in debugging by bringing relevant engineering information from multiple systems into a single AI-assisted investigation.
+
+MCP is the architectural layer that connects the agent to these different tools; the actual goal is reducing the manual effort developers spend gathering and correlating context.
