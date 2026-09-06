@@ -57,4 +57,3 @@ GRANT CONNECT ON DATABASE devsync TO devsync_readonly;
 GRANT USAGE ON SCHEMA public TO devsync_readonly;
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO devsync_readonly;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO devsync_readonly;
--- No INSERT / UPDATE / DELETE / DDL grants are ever given to this role.
