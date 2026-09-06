@@ -24,7 +24,6 @@ This creates unnecessary context switching and makes investigations time-consumi
 
 A developer starts an investigation with a Jira issue:
 
-```text
 "Investigate SCRUM-1"
 
 DevSync then allows Gemini to determine what information is required and which tools should be used.
@@ -77,7 +76,7 @@ The application consists of one MCP client and three independent MCP servers:
        Server        Server        Server
           |            |            |
           v            v            v
-        Jira         Slack      PostgreSQL
+        Jira         Slack      PostgreSQL 
 
 The client does not contain Jira-, Slack-, or PostgreSQL-specific implementation logic. It interacts with the tools exposed by the MCP servers.
 
@@ -85,7 +84,7 @@ For this first version, I implemented the MCP client and all three MCP servers m
 
 The servers communicate with the client through stdio, while each server can independently use whatever mechanism it needs internally, such as REST APIs or a database connection.
 
-Investigation Example
+## Investigation Example
 
 Suppose a Jira issue reports:
 
@@ -126,7 +125,7 @@ not presented as a confirmed root cause.
 
 The purpose is to give the developer the relevant context and evidence in one place, rather than requiring them to manually reconstruct it.
 
-Database Safety
+## Database Safety
 
 Because the investigation agent can request database information, PostgreSQL access is strictly read-only.
 
@@ -150,7 +149,7 @@ The system prompt instructs Gemini not to present an inferred explanation as a c
 
 This distinction is currently enforced at the prompting level, rather than through a formal programmatic verification layer.
 
-Current Scope
+## Current Scope
 
 The current version focuses specifically on cross-system developer context gathering and investigation.
 
@@ -170,7 +169,7 @@ Investigation
 
 The UI is intentionally minimal, with Streamlit used primarily to provide an interface for running investigations while keeping the focus on the underlying MCP and investigation workflow.
 
-Core Idea
+## Core Idea
 
 DevSync reduces the context-switching involved in debugging by bringing relevant engineering information from multiple systems into a single AI-assisted investigation.
 
